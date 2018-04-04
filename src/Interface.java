@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 
 public class Interface {
@@ -13,7 +14,7 @@ public class Interface {
 
     }
 
-    private static Task[] readFromFileTask(String filename){
+    private static ArrayList<Task> readFromFileTask(String filename){
 
         String line;
         String[] task;
@@ -23,7 +24,7 @@ public class Interface {
         String skill;
         ArrayList<Integer> precedences = new ArrayList();
         String precedencesAux;
-        int[] precedencesAux2;
+        String[] precedencesAux2;
         Task finalTask;
         ArrayList<Task> listOfTasks = new ArrayList();
         try {
@@ -31,14 +32,14 @@ public class Interface {
         BufferedReader bufferreader = new BufferedReader(new FileReader(filename));
         line = bufferreader.readLine();
         
-        int firstIndex,secondIndex;
+        int beginIndex, endIndex;
   
         while (line != null) {    
 
             task = line.split(";");
-            taskID = task[0];
-            nrOfPeople = task[1];
-            nrOfMonths = task[2];
+            taskID = Integer.parseInt(task[0]);
+            nrOfPeople = Integer.parseInt(task[1]);
+            nrOfMonths = Integer.parseInt(task[2]);
             skill = task[3]; 
             precedencesAux = task[4];
 
@@ -49,7 +50,7 @@ public class Interface {
 
             precedencesAux2 = precedencesAux.split(",");
             for(int i=0; i < precedencesAux2.length;i++){
-                precedences.add(precedencesAux2[i]);
+                precedences.add(Integer.parseInt(precedencesAux2[i]));
             }
 
             finalTask = new Task(taskID, nrOfPeople, nrOfMonths, skill, precedences);
