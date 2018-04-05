@@ -3,14 +3,15 @@ import java.util.ArrayList;
 
 public class Interface {
 
+    public Interface() {}
+    
     public static void main(String[] args){
-        //Tarefa;nr_pessoas;nr_meses
     
     String taskFile= args[0];
     String elementsFile=args[1];
 
     readFromFileTask(taskFile);
-    File elementsTask = new File(elementsFile);
+    readFromFileElement(elementsFile);
 
     }
 
@@ -65,6 +66,70 @@ public class Interface {
         ex.printStackTrace();
     }
         return listOfTasks;
+    } 
+
+    private static ArrayList<Element> readFromFileElement(String filename){
+
+        String line;
+        String[] element;
+        String elementName;
+        ArrayList<String> skills = new ArrayList();
+        ArrayList<Integer> performances = new ArrayList();
+        String skillsAux;
+        String performancesAux;
+        String[] skillsAux2;
+        String[] performancesAux2;
+        Element finalElement;
+        ArrayList<Element> listOfElements = new ArrayList();
+
+        try {
+
+        BufferedReader bufferreader = new BufferedReader(new FileReader(filename));
+        line = bufferreader.readLine();
+        
+        int skillsBeginIndex, skillsEndIndex, performancesBeginIndex, performancesEndIndex;
+  
+        while (line != null) {    
+
+            element = line.split(";");
+            elementName = element[0];
+            skillsAux = element[1];
+            performancesAux =element[2];
+
+            skillsBeginIndex = skillsAux.indexOf('[');
+            skillsEndIndex = skillsAux.indexOf(']');
+
+            skillsAux.substring(skillsBeginIndex+1, skillsEndIndex);
+
+            skillsAux2 = skillsAux.split(",");
+            for(int i=0; i < skillsAux2.length;i++){
+                skills.add(skillsAux2[i]);
+            }
+
+
+            performancesBeginIndex = performancesAux.indexOf('[');
+            performancesEndIndex = performancesAux.indexOf(']');
+
+            performancesAux.substring(performancesBeginIndex+1, performancesEndIndex);
+
+            performancesAux2 = performancesAux.split(",");
+            for(int i=0; i < performancesAux2.length;i++){
+                performances.add(Integer.parseInt(performancesAux2[i]));
+            }
+
+        
+            finalElement = new Element(elementName, skills, performances);
+            listOfElements.add(finalElement);
+
+            line = bufferreader.readLine();
+        }
+
+    } catch (FileNotFoundException ex) {
+        ex.printStackTrace();
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+        return listOfElements;
     } 
 }
 
