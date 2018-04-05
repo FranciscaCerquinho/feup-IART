@@ -46,22 +46,23 @@ public class Interface {
           
             beginIndex = precedencesAux.indexOf('[');
             endIndex = precedencesAux.indexOf(']');
-
+           
             precedencesAux=precedencesAux.substring(beginIndex+1, endIndex);
-      
+           
             precedencesAux2 = precedencesAux.split(",");
-       
+            if(!precedencesAux2[0].isEmpty()){
             for(int i=0; i < precedencesAux2.length;i++){
                 precedences.add(Integer.parseInt(precedencesAux2[i]));
             }
-
+        }
+        
             finalTask = new Task(taskID, nrOfPeople, nrOfMonths, skill, precedences);
-         
+           
             listOfTasks.add(finalTask);
             precedences.clear();
             line = bufferreader.readLine();
         }
-
+        bufferreader.close();
     } catch (FileNotFoundException ex) {
         ex.printStackTrace();
     } catch (IOException ex) {
@@ -86,8 +87,8 @@ public class Interface {
 
         try {
 
-        BufferedReader bufferreader = new BufferedReader(new FileReader(filename));
-        line = bufferreader.readLine();
+        BufferedReader bufferreader2 = new BufferedReader(new FileReader(filename));
+        line = bufferreader2.readLine();
         
         int skillsBeginIndex, skillsEndIndex, performancesBeginIndex, performancesEndIndex;
   
@@ -104,10 +105,11 @@ public class Interface {
             skillsAux=skillsAux.substring(skillsBeginIndex+1, skillsEndIndex);
 
             skillsAux2 = skillsAux.split(",");
+            if(!skillsAux2[0].isEmpty()){
             for(int i=0; i < skillsAux2.length;i++){
                 skills.add(skillsAux2[i]);
             }
-
+            }
 
             performancesBeginIndex = performancesAux.indexOf('[');
             performancesEndIndex = performancesAux.indexOf(']');
@@ -115,19 +117,24 @@ public class Interface {
             performancesAux=performancesAux.substring(performancesBeginIndex+1, performancesEndIndex);
 
             performancesAux2 = performancesAux.split(",");
+            if(!performancesAux2[0].isEmpty()){
             for(int i=0; i < performancesAux2.length;i++){
                 performances.add(Integer.parseInt(performancesAux2[i]));
             }
+            }
+            if(performances.size()!=skills.size()){
+                System.out.println("Performances size doesn't match to skills size, check your file!");
+                return null;
+            }
 
-         
             finalElement = new Element(elementName, skills, performances);
-      
+          
             listOfElements.add(finalElement);
             performances.clear();
             skills.clear();
-            line = bufferreader.readLine();
+            line = bufferreader2.readLine();
         }
-
+        bufferreader2.close();
     } catch (FileNotFoundException ex) {
         ex.printStackTrace();
     } catch (IOException ex) {
