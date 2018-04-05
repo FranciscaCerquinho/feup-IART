@@ -1,10 +1,11 @@
+package proj;
 import java.util.ArrayList;
 
 public class Element {
 
     private String elementName;
-    private ArrayList<String> skills = new ArrayList();
-    private ArrayList<Integer> performances = new ArrayList();
+    private ArrayList<String> skills = new ArrayList<String>();
+    private ArrayList<Integer> performances = new ArrayList<Integer>();
 
     public Element(String elementName, ArrayList<String> skills, ArrayList<Integer> performances){
         this.elementName=elementName;

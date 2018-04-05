@@ -1,3 +1,4 @@
+package proj;
 import java.util.ArrayList;
 
 public class Task {
@@ -6,7 +7,7 @@ public class Task {
     private int nrOfPeople;
     private int nrOfMonths;
     private String skill;
-    private ArrayList<Integer> precedences = new ArrayList();
+    private ArrayList<Integer> precedences = new ArrayList<Integer>();
 
     public Task(int taskID, int nrOfPeople, int nrOfMonths, String skill, ArrayList<Integer> precedences){
         this.taskID= taskID;

@@ -1,3 +1,4 @@
+package proj;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -23,11 +24,11 @@ public class Interface {
         int nrOfPeople;
         int nrOfMonths;
         String skill;
-        ArrayList<Integer> precedences = new ArrayList();
+        ArrayList<Integer> precedences = new ArrayList<Integer>();
         String precedencesAux;
         String[] precedencesAux2;
         Task finalTask;
-        ArrayList<Task> listOfTasks = new ArrayList();
+        ArrayList<Task> listOfTasks = new ArrayList<Task>();
         try {
 
         BufferedReader bufferreader = new BufferedReader(new FileReader(filename));
@@ -73,14 +74,14 @@ public class Interface {
         String line;
         String[] element;
         String elementName;
-        ArrayList<String> skills = new ArrayList();
-        ArrayList<Integer> performances = new ArrayList();
+        ArrayList<String> skills = new ArrayList<String>();
+        ArrayList<Integer> performances = new ArrayList<Integer>();
         String skillsAux;
         String performancesAux;
         String[] skillsAux2;
         String[] performancesAux2;
         Element finalElement;
-        ArrayList<Element> listOfElements = new ArrayList();
+        ArrayList<Element> listOfElements = new ArrayList<Element>();
 
         try {
 
