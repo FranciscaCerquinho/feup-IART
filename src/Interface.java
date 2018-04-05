@@ -1,4 +1,3 @@
-package proj;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -11,8 +10,8 @@ public class Interface {
     String taskFile= args[0];
     String elementsFile=args[1];
 
-    readFromFileTask(taskFile);
-    readFromFileElement(elementsFile);
+    ArrayList<Task> tasks= readFromFileTask(taskFile);
+    ArrayList<Element> elements= readFromFileElement(elementsFile);
 
     }
 
@@ -44,20 +43,22 @@ public class Interface {
             nrOfMonths = Integer.parseInt(task[2]);
             skill = task[3]; 
             precedencesAux = task[4];
-
+          
             beginIndex = precedencesAux.indexOf('[');
             endIndex = precedencesAux.indexOf(']');
 
-            precedencesAux.substring(beginIndex+1, endIndex);
-
+            precedencesAux=precedencesAux.substring(beginIndex+1, endIndex);
+      
             precedencesAux2 = precedencesAux.split(",");
+       
             for(int i=0; i < precedencesAux2.length;i++){
                 precedences.add(Integer.parseInt(precedencesAux2[i]));
             }
 
             finalTask = new Task(taskID, nrOfPeople, nrOfMonths, skill, precedences);
+         
             listOfTasks.add(finalTask);
-
+            precedences.clear();
             line = bufferreader.readLine();
         }
 
@@ -100,7 +101,7 @@ public class Interface {
             skillsBeginIndex = skillsAux.indexOf('[');
             skillsEndIndex = skillsAux.indexOf(']');
 
-            skillsAux.substring(skillsBeginIndex+1, skillsEndIndex);
+            skillsAux=skillsAux.substring(skillsBeginIndex+1, skillsEndIndex);
 
             skillsAux2 = skillsAux.split(",");
             for(int i=0; i < skillsAux2.length;i++){
@@ -111,17 +112,19 @@ public class Interface {
             performancesBeginIndex = performancesAux.indexOf('[');
             performancesEndIndex = performancesAux.indexOf(']');
 
-            performancesAux.substring(performancesBeginIndex+1, performancesEndIndex);
+            performancesAux=performancesAux.substring(performancesBeginIndex+1, performancesEndIndex);
 
             performancesAux2 = performancesAux.split(",");
             for(int i=0; i < performancesAux2.length;i++){
                 performances.add(Integer.parseInt(performancesAux2[i]));
             }
 
-        
+         
             finalElement = new Element(elementName, skills, performances);
+      
             listOfElements.add(finalElement);
-
+            performances.clear();
+            skills.clear();
             line = bufferreader.readLine();
         }
 
