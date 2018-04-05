@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
+import org.newdawn.slick.util.pathfinding.AStarPathFinder;
+
 
 public class Interface {
 
