@@ -7,6 +7,7 @@ class Node{
     public Edge[] adjacencies;
     public Node parent;
 
+    //hval será a soma do custo dos desempenhos nas tarefas já alocadas
     public Node(String val, double hVal){
             value = val;
             h_scores = hVal;

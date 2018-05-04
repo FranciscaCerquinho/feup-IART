@@ -1,23 +1,13 @@
 import java.io.*;
 import java.util.ArrayList;
-import org.newdawn.slick.util.pathfinding.AStarPathFinder;
+import java.util.HashMap;
 
 
 public class Interface {
 
     public Interface() {}
-    
-    public static void main(String[] args){
-    
-    String taskFile= args[0];
-    String elementsFile=args[1];
 
-    ArrayList<Task> tasks= readFromFileTask(taskFile);
-    ArrayList<Element> elements= readFromFileElement(elementsFile);
-
-    }
-
-    private static ArrayList<Task> readFromFileTask(String filename){
+    public static ArrayList<Task> readFromFileTask(String filename){
 
         String line;
         String[] task;
@@ -34,32 +24,32 @@ public class Interface {
 
         BufferedReader bufferreader = new BufferedReader(new FileReader(filename));
         line = bufferreader.readLine();
-        
+
         int beginIndex, endIndex;
-  
-        while (line != null) {    
+
+        while (line != null) {
 
             task = line.split(";");
             taskID = Integer.parseInt(task[0]);
             nrOfPeople = Integer.parseInt(task[1]);
             nrOfMonths = Integer.parseInt(task[2]);
-            skill = task[3]; 
+            skill = task[3];
             precedencesAux = task[4];
-          
+
             beginIndex = precedencesAux.indexOf('[');
             endIndex = precedencesAux.indexOf(']');
-           
+
             precedencesAux=precedencesAux.substring(beginIndex+1, endIndex);
-           
+
             precedencesAux2 = precedencesAux.split(",");
             if(!precedencesAux2[0].isEmpty()){
             for(int i=0; i < precedencesAux2.length;i++){
                 precedences.add(Integer.parseInt(precedencesAux2[i]));
             }
         }
-        
+
             finalTask = new Task(taskID, nrOfPeople, nrOfMonths, skill, precedences);
-           
+
             listOfTasks.add(finalTask);
             precedences.clear();
             line = bufferreader.readLine();
@@ -71,9 +61,9 @@ public class Interface {
         ex.printStackTrace();
     }
         return listOfTasks;
-    } 
+    }
 
-    private static ArrayList<Element> readFromFileElement(String filename){
+    public static ArrayList<Element> readFromFileElement(String filename){
 
         String line;
         String[] element;
@@ -91,10 +81,10 @@ public class Interface {
 
         BufferedReader bufferreader2 = new BufferedReader(new FileReader(filename));
         line = bufferreader2.readLine();
-        
+
         int skillsBeginIndex, skillsEndIndex, performancesBeginIndex, performancesEndIndex;
-  
-        while (line != null) {    
+
+        while (line != null) {
 
             element = line.split(";");
             elementName = element[0];
@@ -130,7 +120,7 @@ public class Interface {
             }
 
             finalElement = new Element(elementName, skills, performances);
-          
+
             listOfElements.add(finalElement);
             performances.clear();
             skills.clear();
@@ -143,7 +133,5 @@ public class Interface {
         ex.printStackTrace();
     }
         return listOfElements;
-    } 
+    }
 }
-
-

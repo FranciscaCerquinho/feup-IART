@@ -1,9 +1,13 @@
 class Edge{
-    public final double cost;
+    public final double performance;
     public final Node target;
 
-    public Edge(Node targetNode, double costVal){
+    public Edge(Node targetNode, double costPerformance){
             target = targetNode;
-            cost = costVal;
+            performance = costPerformance;
+    }
+
+    public Edge[] buildAdjacencies(Task task){
+
     }
 }
