@@ -9,8 +9,13 @@ public class Element {
 
     public Element(String elementName, ArrayList<String> skills, ArrayList<Integer> performances){
         this.elementName=elementName;
-        this.skills=skills;
-        this.performances=performances;
+
+        for(int i = 0; i < skills.size(); i++)
+            this.skills.add(skills.get(i));
+
+        for(int i = 0; i < performances.size(); i++)
+            this.performances.add(performances.get(i));
+
     }
 
     public String getElementName() {

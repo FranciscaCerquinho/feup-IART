@@ -3,25 +3,28 @@ import java.util.ArrayList;
 
 public class Task {
 
-    private int taskID;
+    private String taskID;
     private int nrOfPeople;
     private int nrOfMonths;
     private String skill;
-    private ArrayList<Integer> precedences = new ArrayList<Integer>();
+    private ArrayList<String> precedences = new ArrayList<String>();
 
-    public Task(int taskID, int nrOfPeople, int nrOfMonths, String skill, ArrayList<Integer> precedences){
+    public Task(String taskID, int nrOfPeople, int nrOfMonths, String skill, ArrayList<String> precedences){
         this.taskID= taskID;
         this.nrOfPeople= nrOfPeople;
         this.nrOfMonths=nrOfMonths;
         this.skill=skill;
-        this.precedences=precedences;
+
+        for(int i = 0; i < precedences.size(); i++)
+            this.precedences.add(precedences.get(i));
+
     }
 
-    public int getTaskID() {
+    public String getTaskID() {
         return taskID;
     }
 
-    public void setTaskID(int taskID) {
+    public void setTaskID(String taskID) {
         this.taskID = taskID;
     }
 
@@ -49,11 +52,11 @@ public class Task {
         this.skill = skill;
     }
 
-    public ArrayList<Integer> getPrecedences() {
+    public ArrayList<String> getPrecedences() {
         return precedences;
     }
 
-    public void setPrecedences(ArrayList<Integer> precedences) {
+    public void setPrecedences(ArrayList<String> precedences) {
         this.precedences = precedences;
     }
 }

@@ -9,11 +9,11 @@ import java.util.Collections;
 
 public class Astar{
 
-  public HashMap<Integer,String> allocatedResources = new HashMap<Integer,String>();
-  public ArrayList<Integer> tasksToAllocate = new ArrayList<Integer>();
+  public HashMap<String,String> allocatedResources = new HashMap<String,String>();
+  public ArrayList<String> tasksToAllocate = new ArrayList<String>();
 
     //h scores is the stright-line distance from the current city to Bucharest
-    public static void main(String[] args){
+  public static void main(String[] args){
 
       String taskFile= args[0];
       String elementsFile=args[1];
@@ -22,7 +22,7 @@ public class Astar{
       ArrayList<Element> elements= Interface.readFromFileElement(elementsFile);
 
       //initialize the graph base on the Romania map
-      Node n1 = new Node("T1",366);
+      /*Node n1 = new Node("T1",366);
       Node n2 = new Node("Zerind",374);
       Node n3 = new Node("Oradea",380);
       Node n4 = new Node("Sibiu",253);
@@ -35,14 +35,14 @@ public class Astar{
       Node n11 = new Node("Drobeta",242);
       Node n12 = new Node("Craiova",160);
       Node n13 = new Node("Bucharest",0);
-      Node n14 = new Node("Giurgiu",77);
+      Node n14 = new Node("Giurgiu",77);*/
 
       //initialize the edges
-      for(int i = 0; i < tasks.length; i++){
-        Edge.buildAdjacencies(tasks.get(i));
+      for(int i = 0; i < tasks.size(); i++){
+        Edge.nodesList(tasks,tasks.get(i),elements);
       }
       //Arad
-      n1.adjacencies = new Edge[]{
+      /*n1.adjacencies = new Edge[]{
               new Edge(n2,75),
               new Edge(n4,140),
               new Edge(n8,118)
@@ -135,12 +135,12 @@ public class Astar{
               new Edge(n13,90)
       };
 
-      AstarSearch(n1,n13);
+      //AstarSearch(n1,n13);
 
-      List<Node> path = printPath(n13);
+      //List<Node> path = printPath(n13);
 
-      System.out.println("Path: " + path);
-
+      //System.out.println("Path: " + path);
+*/
 
     }
 

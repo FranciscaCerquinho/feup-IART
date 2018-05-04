@@ -11,11 +11,11 @@ public class Interface {
 
         String line;
         String[] task;
-        int taskID;
+        String taskID;
         int nrOfPeople;
         int nrOfMonths;
         String skill;
-        ArrayList<Integer> precedences = new ArrayList<Integer>();
+        ArrayList<String> precedences = new ArrayList<String>();
         String precedencesAux;
         String[] precedencesAux2;
         Task finalTask;
@@ -30,7 +30,7 @@ public class Interface {
         while (line != null) {
 
             task = line.split(";");
-            taskID = Integer.parseInt(task[0]);
+            taskID = task[0];
             nrOfPeople = Integer.parseInt(task[1]);
             nrOfMonths = Integer.parseInt(task[2]);
             skill = task[3];
@@ -44,7 +44,7 @@ public class Interface {
             precedencesAux2 = precedencesAux.split(",");
             if(!precedencesAux2[0].isEmpty()){
             for(int i=0; i < precedencesAux2.length;i++){
-                precedences.add(Integer.parseInt(precedencesAux2[i]));
+                precedences.add(precedencesAux2[i]);
             }
         }
 
