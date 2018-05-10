@@ -12,7 +12,6 @@ public class Astar{
   public HashMap<String,String> allocatedResources = new HashMap<String,String>();
   public ArrayList<String> tasksToAllocate = new ArrayList<String>();
 
-    //h scores is the stright-line distance from the current city to Bucharest
   public static void main(String[] args){
 
       String taskFile= args[0];
