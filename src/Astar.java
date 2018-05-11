@@ -21,23 +21,23 @@ public class Astar{
       ArrayList<Element> elements= Interface.readFromFileElement(elementsFile);
       
       System.out.println("Nodes:\n");
-      ArrayList<Node> nodes = Edge.allPossibleAllocations(tasks, elements);
+      ArrayList<Node> nodes = Node.allPossibleAllocations(tasks, elements);
       
+      if(nodes == null)
+    	  return;
       
       System.out.println("\nEdges:\n");
       for(int i = 0; i < nodes.size(); i++) {
     	  nodes.get(i).buildAdjacencies(nodes, tasks, elements);
       }
       
-      Node initialNode = new Node("T0","","",0);
+      Node initialNode = new Node("T0",new ArrayList<String>(),"",0);
       
       for(int i = 0; i < tasks.size(); i++) {
     	  if(tasks.get(i).getPrecedences().isEmpty()) {
     		  for(int j = 0; j < nodes.size(); j++) {
     			  if(nodes.get(j).taskID.equals(tasks.get(i).getTaskID())) {
-    				  
-    				  System.out.println("INITIAL NODE PRECEDENCE: " + nodes.get(i).taskID);
-            		  Edge edge = new Edge(nodes.get(i),0);
+               		  Edge edge = new Edge(nodes.get(j),0);
             		  initialNode.adjacencies.add(edge); 
     			  } 
         	  }
@@ -56,9 +56,15 @@ public class Astar{
       
       AstarSearch(initialNode,finalNode);
 
-      //List<Node> path = printPath(n13);
+      List<Node> path = printPath(finalNode);
 
-      //System.out.println("Path: " + path);
+      System.out.println("Path: " + path);
+      
+      for(int i = 0; i < path.size(); i++) {
+    	  System.out.println("TASKID: " + path.get(i).taskID);
+    	  for(int j = 0; j < path.get(i).elementsNames.size(); j++)
+    		  System.out.println("ELEMENT: "+ path.get(i).elementsNames.get(j));
+      }
 
     }
 
@@ -75,85 +81,84 @@ public class Astar{
     }
 
     public static void AstarSearch(Node source, Node goal){
-//
-//            Set<Node> explored = new HashSet<Node>();
-//
-//            PriorityQueue<Node> queue = new PriorityQueue<Node>(20,
-//                    new Comparator<Node>(){
-//                             //override compare method
-//             public int compare(Node i, Node j){
-//                if(i.f_scores > j.f_scores){
-//                    return 1;
-//                }
-//
-//                else if (i.f_scores < j.f_scores){
-//                    return -1;
-//                }
-//
-//                else{
-//                    return 0;
-//                }
-//             }
-//
-//                    }
-//                    );
-//
-//            //cost from start
-//            source.g_scores = 0;
-//
-//            queue.add(source);
-//
-//            boolean found = false;
-//
-//            while((!queue.isEmpty())&&(!found)){
-//
-//                    //the node in having the lowest f_score value
-//                    Node current = queue.poll();
-//
-//                    explored.add(current);
-//
-//                    //goal found
-//                    if(current.value.equals(goal.value)){
-//                            found = true;
-//                    }
-//
-//                    //check every child of current node
-//                    for(Edge e : current.adjacencies){
-//                            Node child = e.target;
-//                            double cost = e.performance;
-//                            double temp_g_scores = current.g_scores + cost;
-//                            double temp_f_scores = temp_g_scores + child.h_scores;
-//
-//
-//                            /*if child node has been evaluated and
-//                            the newer f_score is higher, skip*/
-//
-//                            if((explored.contains(child)) &&
-//                                    (temp_f_scores >= child.f_scores)){
-//                                    continue;
-//                            }
-//
-//                            /*else if child node is not in queue or
-//                            newer f_score is lower*/
-//
-//                            else if((!queue.contains(child)) ||
-//                                    (temp_f_scores < child.f_scores)){
-//
-//                                    child.parent = current;
-//                                    child.g_scores = temp_g_scores;
-//                                    child.f_scores = temp_f_scores;
-//
-//                                    if(queue.contains(child)){
-//                                            queue.remove(child);
-//                                    }
-//
-//                                    queue.add(child);
-//
-//                            }
-//
-//                    }
-//
-//            }
+
+            Set<Node> explored = new HashSet<Node>();
+
+            PriorityQueue<Node> queue = new PriorityQueue<Node>(20,new Comparator<Node>(){
+                             //override compare method
+             public int compare(Node i, Node j){
+                if(i.f_scores > j.f_scores){
+                    return 1;
+                }
+
+                else if (i.f_scores < j.f_scores){
+                    return -1;
+                }
+
+                else{
+                    return 0;
+                }
+             }
+
+                    }
+                    );
+
+            //cost from start
+            source.g_scores = 0;
+
+            queue.add(source);
+
+            boolean found = false;
+
+            while((!queue.isEmpty())&&(!found)){
+
+                    //the node in having the lowest f_score value
+                    Node current = queue.poll();
+
+                    explored.add(current);
+
+                    //goal found
+                    if(current.taskID.equals(goal.taskID)){
+                            found = true;
+                    }
+
+                    //check every child of current node
+                    for(Edge e : current.adjacencies){
+                            Node child = e.targetNode;
+                            double cost = e.performance;
+                            double temp_g_scores = current.g_scores + cost;
+                            double temp_f_scores = temp_g_scores + child.performance_h;
+
+
+                            /*if child node has been evaluated and
+                            the newer f_score is higher, skip*/
+
+                            if((explored.contains(child)) &&
+                                    (temp_f_scores >= child.f_scores)){
+                                    continue;
+                            }
+
+                            /*else if child node is not in queue or
+                            newer f_score is lower*/
+
+                            else if((!queue.contains(child)) ||
+                                    (temp_f_scores < child.f_scores)){
+
+                                    child.parent = current;
+                                    child.g_scores = temp_g_scores;
+                                    child.f_scores = temp_f_scores;
+
+                                    if(queue.contains(child)){
+                                            queue.remove(child);
+                                    }
+
+                                    queue.add(child);
+
+                            }
+
+                    }
+
+            }
 
     }
 

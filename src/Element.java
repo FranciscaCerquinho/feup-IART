@@ -37,6 +37,16 @@ public class Element {
     public ArrayList<Integer> getPerformances() {
         return performances;
     }
+    
+    public double getPerformance(String skill){
+    	for(int i = 0; i < skills.size(); i++) {
+    		if(skills.get(i).equals(skill))
+    			return performances.get(i);
+    	}
+    	
+    	return 0;
+    }
+
 
     public void setPerformances(ArrayList<Integer> performances) {
         this.performances = performances;

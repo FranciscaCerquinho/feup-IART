@@ -5,14 +5,12 @@ public class Task {
 
     private String taskID;
     private int nrOfPeople;
-    private int nrOfMonths;
     private String skill;
     private ArrayList<String> precedences = new ArrayList<String>();
 
-    public Task(String taskID, int nrOfPeople, int nrOfMonths, String skill, ArrayList<String> precedences){
+    public Task(String taskID, int nrOfPeople, String skill, ArrayList<String> precedences){
         this.taskID= taskID;
         this.nrOfPeople= nrOfPeople;
-        this.nrOfMonths=nrOfMonths;
         this.skill=skill;
 
         for(int i = 0; i < precedences.size(); i++)
@@ -34,14 +32,6 @@ public class Task {
 
     public void setNrOfPeople(int nrOfPeople) {
         this.nrOfPeople = nrOfPeople;
-    }
-
-    public int getNrOfMonths() {
-        return nrOfMonths;
-    }
-    
-    public void setNrOfMonths(int nrOfMonths) {
-        this.nrOfMonths = nrOfMonths;
     }
 
     public String getSkill() {

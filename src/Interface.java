@@ -11,7 +11,6 @@ public class Interface {
         String[] task;
         String taskID;
         int nrOfPeople;
-        int nrOfMonths;
         String skill;
         ArrayList<String> precedences = new ArrayList<String>();
         String precedencesAux;
@@ -30,9 +29,8 @@ public class Interface {
             task = line.split(";");
             taskID = task[0];
             nrOfPeople = Integer.parseInt(task[1]);
-            nrOfMonths = Integer.parseInt(task[2]);
-            skill = task[3];
-            precedencesAux = task[4];
+            skill = task[2];
+            precedencesAux = task[3];
 
             beginIndex = precedencesAux.indexOf('[');
             endIndex = precedencesAux.indexOf(']');
@@ -46,7 +44,7 @@ public class Interface {
             }
         }
 
-            finalTask = new Task(taskID, nrOfPeople, nrOfMonths, skill, precedences);
+            finalTask = new Task(taskID, nrOfPeople, skill, precedences);
 
             listOfTasks.add(finalTask);
             precedences.clear();

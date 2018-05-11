@@ -1,2 +1,4 @@
-Rui;[java,c];[5,3]
 Joao;[web,java];[3,3]
+Rui;[java,c];[5,3]
+Maria;[java];[2]
+Pedro;[java,web];[4,3]
