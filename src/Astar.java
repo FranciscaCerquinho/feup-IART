@@ -19,6 +19,10 @@ public class Astar{
 
       ArrayList<Task> tasks= Interface.readFromFileTask(taskFile);
       ArrayList<Element> elements= Interface.readFromFileElement(elementsFile);
+      
+      System.out.println("Nodes:\n");
+      Edge.allPossibleAllocations(tasks, elements);
+      
 
       //initialize the graph base on the Romania map
       /*Node n1 = new Node("T1",366);
@@ -37,9 +41,11 @@ public class Astar{
       Node n14 = new Node("Giurgiu",77);*/
 
       //initialize the edges
-      for(int i = 0; i < tasks.size(); i++){
-        Edge.nodesList(tasks,tasks.get(i),elements);
-      }
+//      for(int i = 0; i < tasks.size(); i++){
+//    	  System.out.println("\nNodes list for task: "+tasks.get(i).getTaskID()+"\n");
+//        Edge.nodesList(tasks,tasks.get(i),elements);
+//      }
+
       //Arad
       /*n1.adjacencies = new Edge[]{
               new Edge(n2,75),

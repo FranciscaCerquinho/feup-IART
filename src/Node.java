@@ -22,5 +22,7 @@ class Node{
     public String toString(){
             return value;
     }
+    
+    public ArrayList<Node>
 
 }
