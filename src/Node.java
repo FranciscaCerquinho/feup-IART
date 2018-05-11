@@ -23,6 +23,5 @@ class Node{
             return value;
     }
     
-    public ArrayList<Node>
 
 }
