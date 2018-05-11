@@ -54,7 +54,7 @@ public class Astar{
 		  } 
 	  }
       
-      //AstarSearch(n1,n13);
+      AstarSearch(initialNode,finalNode);
 
       //List<Node> path = printPath(n13);
 
