@@ -11,7 +11,7 @@ public static ArrayList<Integer> combination(Object[]  elements, int K){
         int N = elements.length;
         
         if(K > N){
-            System.out.println("Invalid input, Number of people needed is greater than the elements for the task");
+        	System.out.println("Invalid input, the number of people needed to complete the task is greater than the elements qualified for it");
             return null;
         }
         // calculate the possible combinations
