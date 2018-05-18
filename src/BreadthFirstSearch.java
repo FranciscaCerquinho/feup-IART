@@ -9,16 +9,10 @@ import java.util.Queue;
  */
 public class BreadthFirstSearch {
 
-    static Node startNode;
-    static Node goalNode;
+    static Node startNode2;
+    static Node goalNode2;
 
-    public BreadthFirstSearch(Node start, Node goalNode2){
-        startNode = start;
-        goalNode = goalNode2;
-    }
-
-    public boolean compute(){
-    	System.out.println("DENTRO DO COMPUTE");
+    public static void AlgorithmBreadthFirstSearch(Node startNode, Node goalNode){
         if(startNode.equals(goalNode)){
             System.out.println("Goal Node Found!");
             System.out.println(startNode);
@@ -31,23 +25,20 @@ public class BreadthFirstSearch {
 
         while(!queue.isEmpty()){
             Node current = queue.remove();
+        
             if(current.equals(goalNode)) {
-                System.out.println(explored);
-                for(int i = 0; i < explored.size(); i++) {
-                	System.out.println(explored.get(i).taskID);
-                }
-                return true;
+              //  System.out.println(explored);
             }
             else{
                 if(current.adjacencies.isEmpty()) {
-                    return false;
-
+                    continue;
                 }
                 else {
-                	
+                    Node child ;
                 	for(int i = 0; i < current.adjacencies.size(); i++) {
+                        child = current.adjacencies.get(i).targetNode;
                         queue.add(current.adjacencies.get(i).targetNode);
-
+                        child.parent = current;
                 	}
 
                 }
@@ -55,7 +46,6 @@ public class BreadthFirstSearch {
             explored.add(current);
         }
 
-        return false;
 
     }
     
@@ -101,10 +91,11 @@ public class BreadthFirstSearch {
   		  } 
   	  }
         
-  	  BreadthFirstSearch breadth = new BreadthFirstSearch(initialNode,finalNode);
-  	  breadth.compute();
 
-
+       AlgorithmBreadthFirstSearch(initialNode,finalNode);
+       System.out.println();
+       System.out.println("Algorithm Breadth First Search:");
+       System.out.println();
         List<Node> path = printPath(finalNode);
 
         System.out.println("Path: " + path);
@@ -121,6 +112,7 @@ public class BreadthFirstSearch {
 	public static List<Node> printPath(Node target){
               List<Node> path = new ArrayList<Node>();
 
+           
       for(Node node = target; node!=null; node = node.parent){
           path.add(node);
       }
