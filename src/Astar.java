@@ -114,7 +114,8 @@ public class Astar{
 
                     //the node in having the lowest f_score value
                     Node current = queue.poll();
-
+                    //guloso g = 0
+                    //custo uniforme h= 0
                     explored.add(current);
 
                     //goal found
