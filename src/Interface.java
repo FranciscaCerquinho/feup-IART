@@ -73,7 +73,7 @@ public class Interface {
             System.out.println("Exit - 5");
             System.out.println();
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            int option = 0;
+            int option;
             try{
                 option = Integer.parseInt(br.readLine());
                 if(option <= 0 || option > 5) throw new NumberFormatException();
