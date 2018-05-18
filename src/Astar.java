@@ -16,6 +16,7 @@ public class Astar{
 
       String taskFile= args[0];
       String elementsFile=args[1];
+      String typeAlgorithm=args[2];
 
       ArrayList<Task> tasks= Interface.readFromFileTask(taskFile);
       ArrayList<Element> elements= Interface.readFromFileElement(elementsFile);
@@ -54,7 +55,14 @@ public class Astar{
 		  } 
 	  }
       
-      AstarSearch(initialNode,finalNode);
+	  if(Integer.parseInt(args[2])== 0)
+		  System.out.println("\nASTAR SEARCH\n\n");
+	  else if(Integer.parseInt(args[2]) == 1)
+	      System.out.println("\nGREEDY SEARCH\n\n");
+	  else
+	      System.out.println("\nUNIFORM COST SEARCH\n\n");
+
+      Algorithm(initialNode,finalNode,Integer.parseInt(args[2]));
 
       List<Node> path = printPath(finalNode);
 
@@ -80,7 +88,7 @@ public class Astar{
     return path;
     }
 
-    public static void AstarSearch(Node source, Node goal){
+    public static void Algorithm(Node source, Node goal, int algorithmType){
 
             Set<Node> explored = new HashSet<Node>();
 
@@ -128,7 +136,13 @@ public class Astar{
                             Node child = e.targetNode;
                             double cost = e.performance;
                             double temp_g_scores = current.g_scores + cost;
-                            double temp_f_scores = temp_g_scores + child.performance_h;
+                            double temp_f_scores;
+                            if(algorithmType==0)
+                            	temp_f_scores = temp_g_scores + child.performance_h;
+                            else if(algorithmType == 1)
+                            	temp_f_scores = child.performance_h;
+                            else
+                            	temp_f_scores = temp_g_scores;
 
 
                             /*if child node has been evaluated and
@@ -146,7 +160,9 @@ public class Astar{
                                     (temp_f_scores < child.f_scores)){
 
                                     child.parent = current;
-                                    child.g_scores = temp_g_scores;
+                                    if(algorithmType == 0)
+                                    	child.g_scores = temp_g_scores;
+                                    
                                     child.f_scores = temp_f_scores;
 
                                     if(queue.contains(child)){
