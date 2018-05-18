@@ -2,6 +2,12 @@
 
 ### Pesquisa aplicada à gestão de projetos
 
+### Como compilar e executar
+
+-javac -d out/ -Xlint src/*.java
+-cd out/
+-java Interface tasks.txt elements.txt
+
 
 ### Membros
 
