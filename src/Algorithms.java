@@ -2,91 +2,14 @@ import java.util.PriorityQueue;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.List;
 import java.util.Comparator;
 import java.util.ArrayList;
-import java.util.Collections;
 
-public class Astar{
+
+public class Algorithms{
 
   public HashMap<String,String> allocatedResources = new HashMap<String,String>();
   public ArrayList<String> tasksToAllocate = new ArrayList<String>();
-
-  public static void main(String[] args){
-
-      String taskFile= args[0];
-      String elementsFile=args[1];
-      String typeAlgorithm=args[2];
-
-      ArrayList<Task> tasks= Interface.readFromFileTask(taskFile);
-      ArrayList<Element> elements= Interface.readFromFileElement(elementsFile);
-      
-      System.out.println("Nodes:\n");
-      ArrayList<Node> nodes = Node.allPossibleAllocations(tasks, elements);
-      
-      if(nodes == null)
-    	  return;
-      
-      System.out.println("\nEdges:\n");
-      for(int i = 0; i < nodes.size(); i++) {
-    	  nodes.get(i).buildAdjacencies(nodes, tasks, elements);
-      }
-      
-      Node initialNode = new Node("T0",new ArrayList<String>(),"",0);
-      
-      for(int i = 0; i < tasks.size(); i++) {
-    	  if(tasks.get(i).getPrecedences().isEmpty()) {
-    		  for(int j = 0; j < nodes.size(); j++) {
-    			  if(nodes.get(j).taskID.equals(tasks.get(i).getTaskID())) {
-               		  Edge edge = new Edge(nodes.get(j),0);
-            		  initialNode.adjacencies.add(edge); 
-    			  } 
-        	  }
-    	  }
-    		
-      }
-      
-	  Node finalNode = null;
-      
-	  for(int i = 0; i < nodes.size(); i++) {
-		  if(nodes.get(i).adjacencies.isEmpty()) {
-			  System.out.println("Final NODE: " + nodes.get(i).taskID);
-			  finalNode = nodes.get(i);
-		  } 
-	  }
-      
-	  if(Integer.parseInt(args[2])== 0)
-		  System.out.println("\nASTAR SEARCH\n\n");
-	  else if(Integer.parseInt(args[2]) == 1)
-	      System.out.println("\nGREEDY SEARCH\n\n");
-	  else
-	      System.out.println("\nUNIFORM COST SEARCH\n\n");
-
-      Algorithm(initialNode,finalNode,Integer.parseInt(args[2]));
-
-      List<Node> path = printPath(finalNode);
-
-      System.out.println("Path: " + path);
-      
-      for(int i = 0; i < path.size(); i++) {
-    	  System.out.println("TASKID: " + path.get(i).taskID);
-    	  for(int j = 0; j < path.get(i).elementsNames.size(); j++)
-    		  System.out.println("ELEMENT: "+ path.get(i).elementsNames.get(j));
-      }
-
-    }
-
-    public static List<Node> printPath(Node target){
-            List<Node> path = new ArrayList<Node>();
-
-    for(Node node = target; node!=null; node = node.parent){
-        path.add(node);
-    }
-
-    Collections.reverse(path);
-
-    return path;
-    }
 
     public static void Algorithm(Node source, Node goal, int algorithmType){
 

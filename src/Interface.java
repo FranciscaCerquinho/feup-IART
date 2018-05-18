@@ -1,10 +1,104 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Interface {
 
-    public Interface() {}
+    public ArrayList<Task> tasks;
+    public  ArrayList<Element> elements;
+    public ArrayList<Node> nodes;
+    public Node initialNode;
+    public Node finalNode;
 
+
+    public Interface(ArrayList<Task> t,  ArrayList<Element> e){
+        
+        tasks =t;
+        elements = e;
+
+        getNodesAndEdges();
+        if(menuOptions())
+            return;
+    }
+
+
+    public void getNodesAndEdges(){
+        System.out.println("Nodes:\n");
+        nodes = Node.allPossibleAllocations(tasks, elements);
+        
+        if(nodes == null)
+            return;
+        
+        System.out.println("\nEdges:\n");
+        for(int i = 0; i < nodes.size(); i++) {
+            nodes.get(i).buildAdjacencies(nodes, tasks, elements);
+        }
+        
+        initialNode = new Node("T0",new ArrayList<String>(),"",0);
+        
+        for(int i = 0; i < tasks.size(); i++) {
+            if(tasks.get(i).getPrecedences().isEmpty()) {
+                for(int j = 0; j < nodes.size(); j++) {
+                    if(nodes.get(j).taskID.equals(tasks.get(i).getTaskID())) {
+                           Edge edge = new Edge(nodes.get(j),0);
+                        initialNode.adjacencies.add(edge); 
+                    } 
+                }
+            }
+              
+        }
+        
+        finalNode = null;
+        
+        for(int i = 0; i < nodes.size(); i++) {
+            if(nodes.get(i).adjacencies.isEmpty()) {
+                System.out.println("Final NODE: " + nodes.get(i).taskID);
+                finalNode = nodes.get(i);
+            } 
+        }
+    }
+    public boolean menuOptions(){
+        boolean quit = false;
+
+        while(!quit) {
+            System.out.println();
+            System.out.println("Choose the Alghorithm: ");
+            System.out.println();
+            System.out.println("Astar Alghorithm- 1");
+            System.out.println("Uniform Cost - 2");
+            System.out.println("Greedy Alghorithm  - 3");
+            System.out.println("Breadth First Search Alghorithm  - 4");
+            System.out.println("Exit - 5");
+            System.out.println();
+            int option = Integer.parseInt(System.console().readLine());
+            System.out.println();
+
+            if(option ==1)
+                Algorithms.Algorithm(initialNode, finalNode, 0);
+            if(option ==2)
+                Algorithms.Algorithm(initialNode, finalNode, 2);
+            if(option ==3)
+                Algorithms.Algorithm(initialNode, finalNode, 1);
+            if(option ==4)
+                BreadthFirstSearch.AlgorithmBreadthFirstSearch(initialNode, finalNode);
+            if(option==5)
+                quit=true;
+            if(option !=5){
+                List<Node> path = printPath(finalNode);
+
+                System.out.println("Path: " + path);
+                
+                for(int i = 0; i < path.size(); i++) {
+                    System.out.println("TASKID: " + path.get(i).taskID);
+                    for(int j = 0; j < path.get(i).elementsNames.size(); j++)
+                        System.out.println("ELEMENT: "+ path.get(i).elementsNames.get(j));
+                }
+            }
+        }
+
+        return true;
+    }
     public static ArrayList<Task> readFromFileTask(String filename){
 
         String line;
@@ -130,4 +224,31 @@ public class Interface {
     }
         return listOfElements;
     }
+
+    public static List<Node> printPath(Node target){
+        List<Node> path = new ArrayList<Node>();
+
+        for(Node node = target; node!=null; node = node.parent){
+            path.add(node);
+        }
+
+        Collections.reverse(path);
+
+        return path;
+    }
+
+    public static void main(String[] args){
+
+        String taskFile= args[0];
+        String elementsFile=args[1];
+  
+        ArrayList<Task> tasks= readFromFileTask(taskFile);
+        ArrayList<Element> elements= readFromFileElement(elementsFile);
+        
+        Interface start = new Interface(tasks,elements);
+            
+        
+  
+    }
+  
 }
