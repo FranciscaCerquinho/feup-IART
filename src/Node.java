@@ -42,7 +42,7 @@ class Node{
         				if(nodes.get(k).taskID.equals(tasks.get(i).getPrecedences().get(j))) {
         					Edge newEdge = new Edge(this, this.performance_h);
         					nodes.get(k).adjacencies.add(newEdge);
-        					/*System.out.println("NODE: " + this.taskID);
+        					System.out.println("NODE: " + this.taskID);
                         	System.out.println("PRECEDENCES OF NODE: " + nodes.get(k).taskID);
                         	System.out.println("SKILL: " + this.skill);
                         	for(int l=0; l < this.elementsNames.size(); l++)
@@ -50,7 +50,7 @@ class Node{
                         	for(int t=0; t < nodes.get(k).elementsNames.size(); t++)
                         		System.out.println("PRECEDENCES ELEMENT NAME: " + nodes.get(k).elementsNames.get(t));
         					System.out.println("PRECEDENCE PERFORMANCE: " + nodes.get(k).performance_h);
-                        	System.out.println();*/
+                        	System.out.println();
 
         				}
         			}
@@ -92,12 +92,12 @@ class Node{
 				t += tasks.get(i).getNrOfPeople() -1;
 				performanceGroup = performanceGroup / elementsNames.size();
 	    		nodes.add(new Node(tasks.get(i).getTaskID(),elementsNames, tasks.get(i).getSkill(), performanceGroup));
-	    		/*System.out.println("TASK: " + tasks.get(i).getTaskID());
+	    		System.out.println("TASK: " + tasks.get(i).getTaskID());
 	        	System.out.println("SKILL OF TASK: " + tasks.get(i).getSkill());
 	        	System.out.println("PERFORMANCE ELEMENT: " + performanceGroup);
 	        	for(int f = 0; f < elementsNames.size(); f++) {
 	        		System.out.println("ELEMENT NAME: " + elementsNames.get(f) + "\n");
-	        	}*/
+	        	}
     		}
     		
 

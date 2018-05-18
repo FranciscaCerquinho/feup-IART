@@ -247,8 +247,6 @@ public class Interface {
         
         Interface start = new Interface(tasks,elements);
             
-        
-  
     }
   
 }
