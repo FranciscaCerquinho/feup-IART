@@ -6,7 +6,7 @@ import java.util.List;
 public class Interface {
 
     public ArrayList<Task> tasks;
-    public  ArrayList<Element> elements;
+    public ArrayList<Element> elements;
     public ArrayList<Node> nodes;
     public Node initialNode;
     public Node finalNode;
@@ -58,6 +58,7 @@ public class Interface {
             } 
         }
     }
+
     public boolean menuOptions(){
         boolean quit = false;
 
@@ -65,24 +66,37 @@ public class Interface {
             System.out.println();
             System.out.println("Choose the Alghorithm: ");
             System.out.println();
-            System.out.println("Astar Alghorithm- 1");
+            System.out.println("Astar Alghorithm - 1");
             System.out.println("Uniform Cost - 2");
-            System.out.println("Greedy Alghorithm  - 3");
-            System.out.println("Breadth First Search Alghorithm  - 4");
+            System.out.println("Greedy Alghorithm - 3");
+            System.out.println("Breadth First Search Alghorithm - 4");
             System.out.println("Exit - 5");
             System.out.println();
-            int option = Integer.parseInt(System.console().readLine());
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            int option = 0;
+            try{
+                option = Integer.parseInt(br.readLine());
+                if(option <= 0 || option > 5) throw new NumberFormatException();
+            }catch(NumberFormatException nfe){
+                System.out.println();
+                System.err.println("Invalid Format! Value must be integer in the range of 1 to 5");
+                continue;
+            }catch (IOException e) {
+                System.out.println();
+                System.err.println("Unexpected error");
+                continue;
+            }
             System.out.println();
 
-            if(option ==1)
+            if(option == 1)
                 Algorithms.Algorithm(initialNode, finalNode, 0);
-            if(option ==2)
+            if(option == 2)
                 Algorithms.Algorithm(initialNode, finalNode, 2);
-            if(option ==3)
+            if(option == 3)
                 Algorithms.Algorithm(initialNode, finalNode, 1);
-            if(option ==4)
+            if(option == 4)
                 BreadthFirstSearch.AlgorithmBreadthFirstSearch(initialNode, finalNode);
-            if(option==5)
+            if(option == 5)
                 quit=true;
             if(option !=5){
                 List<Node> path = printPath(finalNode);
