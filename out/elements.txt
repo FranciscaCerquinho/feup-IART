@@ -1,4 +1,5 @@
-Joao;[web,java];[3,3]
-Rui;[java,c];[5,3]
-Maria;[java];[2]
+Mariana;[phython];[1]
+Rui;[java,phython];[5,3]
+Maria;[c];[2]
 Pedro;[java,web];[4,3]
+João;[web,c];[3,3]

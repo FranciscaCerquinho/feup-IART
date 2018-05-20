@@ -22,6 +22,7 @@ public class BreadthFirstSearch {
         ArrayList<Node> explored = new ArrayList<>();
         queue.add(startNode);
         explored.add(startNode);
+        Node child ;
 
         while(!queue.isEmpty()){
             Node current = queue.remove();
@@ -34,19 +35,18 @@ public class BreadthFirstSearch {
                     continue;
                 }
                 else {
-                    Node child ;
-                	for(int i = 0; i < current.adjacencies.size(); i++) {
-                        child = current.adjacencies.get(i).targetNode;
+           
+                	for(int i = 0; i < current.adjacencies.size(); i++) {     
+                        child= current.adjacencies.get(i).targetNode;            
                         queue.add(current.adjacencies.get(i).targetNode);
-                        child.parent = current;
+                        child.parent=current;
                 	}
 
                 }
             }
             explored.add(current);
+      
         }
-
-
     }
     
     public static void main(String[] args){
